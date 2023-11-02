@@ -32,10 +32,9 @@ window.addEventListener('DOMContentLoaded', function(event) {
             paragraphTextResult.textContent = result;
         }
         results();
-        
+
         let nombreEssaisEcrit = document.getElementById("essais");
-        let nombreEssaisToAdd = document.createTextNode(tries);
-        nombreEssaisEcrit.appendChild(nombreEssaisToAdd);
+        nombreEssaisEcrit.textContent = "Nombre d'essais : " + tries;
         tries++;
     }
 

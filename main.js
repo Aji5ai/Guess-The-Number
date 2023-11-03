@@ -21,20 +21,20 @@ window.addEventListener("DOMContentLoaded", function (event) {
   function submitForm(event) {
     event.preventDefault(); //le formulaire recharge la page quand il est validé, pour éviter ça, on ajoute event et preventDefault
     value = form.guess.value; // Permet de récupérer la valeur entrée par l'utilisateur
-    console.log("La valeur entrée par l'utilisateur est :" + value);
+    console.log("La valeur entrée par l'utilisateur est :" + value); // pour tricher
 
     const paragraphTextResult = document.getElementById("pForResult"); // récupère l'élément p du html dans une const
 
     function results() {
       if (randomNumber == value) {
-        // 2 = parce que sinon c'est pas les mêmes types, value n'est pas en number mais en string
+        // 2 = et pas 3 parce que sinon c'est pas les mêmes types, value n'est pas en number mais en string
         if (
           localStorage.getItem("Score de la partie") &&
           tries < localStorage.getItem("Score de la partie")
         ) {
           localStorage.removeItem("Score de la partie");
           localStorage.setItem("Score de la partie", tries);
-        }
+        } 
         localStorage.setItem("Score de la partie", tries); // on stocke dans local storage le nombre d'essais quand gagné
         return "Bravo ! Vous avez trouvé le bon nombre !";
       } else if (randomNumber > value) {
@@ -80,5 +80,3 @@ function reset() {
       "Veuillez gagner au moins une fois pour obtenir un score";
   }
 }
-
-// faire bouton relancer partie avec refresh

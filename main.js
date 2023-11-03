@@ -25,17 +25,19 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
     const paragraphTextResult = document.getElementById("pForResult"); // récupère l'élément p du html dans une const
 
+    // Fonction dont le but est de prévenir le joueur de son avancement, et de stocker son score selon ses essais
     function results() {
       if (randomNumber == value) {
         // 2 = et pas 3 parce que sinon c'est pas les mêmes types, value n'est pas en number mais en string
-        if (
+        if ( // on vérifie si on a déjà un score enregistré dans localStorage et s'il est supérieur à notre nombre d'essai quand on gagne
           localStorage.getItem("Score de la partie") &&
           tries < localStorage.getItem("Score de la partie")
         ) {
-          localStorage.removeItem("Score de la partie");
-          localStorage.setItem("Score de la partie", tries);
-        } 
-        localStorage.setItem("Score de la partie", tries); // on stocke dans local storage le nombre d'essais quand gagné
+          localStorage.removeItem("Score de la partie"); //Si on a un nouveau meilleur score on retire l'ancien
+          localStorage.setItem("Score de la partie", tries); // Et on ajoute le nouveau dans localStorage
+        } else if (!localStorage.getItem("Score de la partie")) { //Si l'on n'a pas encore de score stocké
+          localStorage.setItem("Score de la partie", tries); // on stocke dans local storage le nombre d'essais quand gagné
+        }
         return "Bravo ! Vous avez trouvé le bon nombre !";
       } else if (randomNumber > value) {
         return "Votre nombre est en dessous de la valeur recherchée.";
@@ -45,7 +47,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
         console.log("Erreur !");
       }
     }
-    scoreAffichage.textContent = "";
     paragraphTextResult.textContent = results(); // On met la phrase stockée dans result, dans le contenu texte du paragraphe créé en html
 
     // Ajout du nombre d'essais
@@ -54,8 +55,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
     tries++; // incrémente à chaque boucle le nombre d'essais
 
     // Score
-    if (localStorage.getItem("Score de la partie") != null) {
-      scoreAffichage.textContent =
+    if (localStorage.getItem("Score de la partie") != null) { // si le score n'est pas null, alors on l'affiche
+      scoreAffichage.textContent = 
         "Votre meilleur score est de : " +
         localStorage.getItem("Score de la partie") +
         " essais"; // remplace le contenu de ce p avec le meilleur score
@@ -69,7 +70,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
   startGame(); // première fonction lancée, pour créer un nombre à deviner
 });
 
-function reset() {
+function reset() { //ne fonctionne pas si contenue dans window.addEventListener("DOMContentLoaded", function (event). Ne peut pas etre appellée en dehors ?
   scoreAffichage = document.getElementById("score"); // récupère le p avec id 'score' du html
   if (localStorage.getItem("Score de la partie") != null) {
     localStorage.removeItem("Score de la partie"); // remplace le contenu de ce p avec le meilleur score

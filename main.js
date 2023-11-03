@@ -23,20 +23,19 @@ window.addEventListener('DOMContentLoaded', function(event) {
         console.log('La valeur entrée par l\'utilisateur est :' + value); 
 
         const paragraphTextResult = document.getElementById("pForResult"); // récupère l'élément p du html dans une const
-        let result; // initialisation result
+        
         function results() {
             if (randomNumber == value) { // 2 = parce que sinon c'est pas les mêmes types, value n'est pas en number mais en string
-                result = "Bravo ! Vous avez trouvé le bon nombre !"
+                return "Bravo ! Vous avez trouvé le bon nombre !";
             } else if (randomNumber > value){
-                result = "Votre nombre est en dessous de la valeur recherchée."
+                return "Votre nombre est en dessous de la valeur recherchée.";
             } else if (randomNumber < value){
-                result = "Votre nombre dépasse la valeur recherchée."
+                return "Votre nombre dépasse la valeur recherchée.";
             } else {
-                console.log("Erreur !")
+                console.log("Erreur !");
             }
-            paragraphTextResult.textContent = result; // On met la phrase stockée dans result, dans le contenu texte du paragraphe créé en html
         }
-        results(); // appelle la fonction
+        paragraphTextResult.textContent = results(); // On met la phrase stockée dans result, dans le contenu texte du paragraphe créé en html
 
         // Ajout du nombre d'essais
         let nombreEssaisEcrit = document.getElementById("essais"); // récupère le p avec id 'essais' du html

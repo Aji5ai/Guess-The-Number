@@ -80,6 +80,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
 
 // Fonction permettant de remettre à 0 le score
+//onclick = cherche la fonction dans le scope global du js. Donc la fonction reset n'est pas accessible si elle est mise dans window.addEventListener("DOMContentLoaded").
+//Si l'on veut bien lancer tout le js uniquement une fois que le DOM est lancé, dans ce cas il faut changer le onclick par un addEventListener sur le bouton pour reset.
 function reset() {
   scoreAffichage = document.getElementById("score"); // récupère le p avec id 'score' du html
   if (localStorage.getItem("Score de la partie") != null) { // Si un score a été stocké, alors
